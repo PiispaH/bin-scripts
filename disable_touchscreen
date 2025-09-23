@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+touch_id=$(xinput list | grep -i "touch system" | grep -o 'id=[0-9]*' | cut -d= -f2)
+
+xinput disable $touch_id
+

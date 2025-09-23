@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+# makes the name lowercase and turns dashes to underscores
+cleaned_name="$(echo "$1" | tr '[:upper:]' '[:lower:]' | tr '-' '_')"
+
+# copies the template project files to the new directory
+echo "Creating new Python project: $1"
+mkdir ~/projects/$1
+cp -a ~/bin/resources/template_project/. ~/projects/$1/
+
+
+# renames everything to match the project name
+mv ~/projects/$1/NAME ~/projects/$1/$cleaned_name
+sed -i "s/NAME/$cleaned_name/g" ~/projects/$1/main.py 
+sed -i "s/PROJECT_NAME/$1/g" ~/projects/$1/README.md
+
+cd ~/projects/$1
+
+# makes and activates the virtual environment
+python3 -m venv .venv --prompt $1
+source .venv/bin/activate
+python3 -m pip install -q black
+
