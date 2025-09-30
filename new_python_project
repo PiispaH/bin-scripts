@@ -16,8 +16,10 @@ sed -i "s/PROJECT_NAME/$1/g" ~/projects/$1/README.md
 
 cd ~/projects/$1
 
+chmod +x ./main.py
+
 # makes and activates the virtual environment
-python3 -m venv .venv --prompt $1
+python3 -m venv .venv --prompt $cleaned_name
 source .venv/bin/activate
 python3 -m pip install -q black
 
