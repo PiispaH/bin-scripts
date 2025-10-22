@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+gnome-terminal --geometry=160x40+320+170 --zoom=0.85
