@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+vim ~/.config/Code/User/settings.json
+
