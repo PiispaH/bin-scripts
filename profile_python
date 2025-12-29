@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+show_help() {
+  echo "Usage: $(basename $0) [OPTIONS] [FILE]"
+  echo "Description:"
+  echo "  Runs the given Python file with cProfile and shows the results."
+  echo "Options:"
+  echo "  -h, --help     Display this help message"
+  # Add more options and descriptions as needed
+  exit 0
+}
+
+if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+  show_help
+fi
+
+if [[ -z "$1" ]]; then
+    echo "You must give a filepath."
+elif [[ "$(dirname "$VIRTUAL_ENV")" = "$PWD" ]]; then
+    name=$(basename "$1" .py)
+    python -m cProfile -o "data/$name.prof" "$1"
+    snakeviz "data/$name.prof"
+else
+    echo "Error: venv not active or current working directory is not the root of the project."
+fi
+
